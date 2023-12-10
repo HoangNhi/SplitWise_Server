@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BE_WiseWallet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231207082434_Add property Name in Application")]
-    partial class AddpropertyNameinApplication
+    [Migration("20231210134011_InitDb")]
+    partial class InitDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,21 @@ namespace BE_WiseWallet.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("ApplicationUserTeam", b =>
+                {
+                    b.Property<string>("MembersId")
+                        .HasColumnType("text");
+
+                    b.Property<int>("TeamsId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("MembersId", "TeamsId");
+
+                    b.HasIndex("TeamsId");
+
+                    b.ToTable("UserTeam", (string)null);
+                });
 
             modelBuilder.Entity("BE_WiseWallet.Entities.ApplicationUser", b =>
                 {
@@ -262,21 +277,20 @@ namespace BE_WiseWallet.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CodeInvite")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<long>("ImageId")
+                    b.Property<long?>("ImageId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("InviteLink")
+                    b.Property<string>("LeaderId")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("LeaderId")
-                        .HasColumnType("integer");
+                    b.Property<string>("LinkInvite")
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -468,6 +482,21 @@ namespace BE_WiseWallet.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ApplicationUserTeam", b =>
+                {
+                    b.HasOne("BE_WiseWallet.Entities.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("MembersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BE_WiseWallet.Entities.Team", null)
+                        .WithMany()
+                        .HasForeignKey("TeamsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("BE_WiseWallet.Entities.ApplicationUser", b =>
                 {
                     b.HasOne("BE_WiseWallet.Entities.Image", "Image")
@@ -492,9 +521,7 @@ namespace BE_WiseWallet.Migrations
                 {
                     b.HasOne("BE_WiseWallet.Entities.Image", "Image")
                         .WithMany()
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ImageId");
 
                     b.Navigation("Image");
                 });

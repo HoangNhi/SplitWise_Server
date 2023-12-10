@@ -11,7 +11,7 @@ namespace BE_WiseWallet.Entities
         public string FileName { get; set; }
         public string OriginalFileName { get; set; }
         public long FileSize { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime ModifiedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime ModifiedAt { get; set; } = DateTime.Now;
     }
 }

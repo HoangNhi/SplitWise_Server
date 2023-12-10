@@ -11,7 +11,7 @@ namespace BE_WiseWallet.Entities
         public string content { get; set; }
         public Boolean isMessage { get; set; } = false;
         public Boolean isRemoved { get; set; } = false;
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
     }
 }

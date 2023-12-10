@@ -20,8 +20,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 
 // Add services to the container.
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+// Solve circular references
+builder.Services.AddControllersWithViews()
+    .AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 
 // Custom SwaggerGen
 builder.Services.AddSwaggerGen(c => {
@@ -81,6 +88,7 @@ builder.Services.AddAuthentication(options =>
 // Add Scoped Services
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<ITeamService, TeamService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 // CORS
 var cors = new EnableCorsAttribute("AllowAll");

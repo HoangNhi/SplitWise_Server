@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BE_WiseWallet.Migrations
 {
     /// <inheritdoc />
-    public partial class Add_Entity : Migration
+    public partial class InitDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -191,11 +191,11 @@ namespace BE_WiseWallet.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    LeaderId = table.Column<int>(type: "integer", nullable: false),
+                    LeaderId = table.Column<string>(type: "text", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    ImageId = table.Column<long>(type: "bigint", nullable: false),
-                    InviteLink = table.Column<string>(type: "text", nullable: false),
-                    CodeInvite = table.Column<string>(type: "text", nullable: false),
+                    ImageId = table.Column<long>(type: "bigint", nullable: true),
+                    LinkInvite = table.Column<string>(type: "text", nullable: true),
+                    CodeInvite = table.Column<string>(type: "text", nullable: true),
                     TotalPaid = table.Column<double>(type: "double precision", nullable: false),
                     isCompleted = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -208,8 +208,7 @@ namespace BE_WiseWallet.Migrations
                         name: "FK_Teams_Images_ImageId",
                         column: x => x.ImageId,
                         principalTable: "Images",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -297,6 +296,30 @@ namespace BE_WiseWallet.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "UserTeam",
+                columns: table => new
+                {
+                    MembersId = table.Column<string>(type: "text", nullable: false),
+                    TeamsId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserTeam", x => new { x.MembersId, x.TeamsId });
+                    table.ForeignKey(
+                        name: "FK_UserTeam_AspNetUsers_MembersId",
+                        column: x => x.MembersId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserTeam_Teams_TeamsId",
+                        column: x => x.TeamsId,
+                        principalTable: "Teams",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -348,6 +371,11 @@ namespace BE_WiseWallet.Migrations
                 name: "IX_Teams_ImageId",
                 table: "Teams",
                 column: "ImageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserTeam_TeamsId",
+                table: "UserTeam",
+                column: "TeamsId");
         }
 
         /// <inheritdoc />
@@ -378,16 +406,19 @@ namespace BE_WiseWallet.Migrations
                 name: "Splits");
 
             migrationBuilder.DropTable(
-                name: "Teams");
+                name: "Transactions");
 
             migrationBuilder.DropTable(
-                name: "Transactions");
+                name: "UserTeam");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Teams");
 
             migrationBuilder.DropTable(
                 name: "Images");

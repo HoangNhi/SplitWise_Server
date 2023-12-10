@@ -1,9 +1,11 @@
-﻿using BE_WiseWallet.Entities;
+﻿using BE_WiseWallet.Data;
+using BE_WiseWallet.Entities;
 using BE_WiseWallet.Entities.Requests;
 using BE_WiseWallet.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BE_WiseWallet.Controllers
 {
@@ -15,11 +17,13 @@ namespace BE_WiseWallet.Controllers
         private readonly ITeamService _teamService;
         private readonly IImageService _imageService;
         private readonly UserManager<ApplicationUser> _userManager;
-        public TeamController(ITeamService teamService, IImageService imageService, UserManager<ApplicationUser> userManager)
+        private readonly ApplicationDbContext _context;
+        public TeamController(ITeamService teamService, IImageService imageService, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _teamService = teamService;
             _imageService = imageService;
             _userManager = userManager;
+            _context = context;
         }
 
         [HttpGet("{id}")]
@@ -28,7 +32,7 @@ namespace BE_WiseWallet.Controllers
             return Ok(await _teamService.GetTeamById(id));
         }
 
-        [HttpPost]
+        [HttpPost("CreateNewTeam")]
         public async Task<IActionResult> CreateNewTeam([FromForm] TeamRequest teamRequest)
         {
             Image image = _imageService.Upload(teamRequest.Image).Result;
@@ -37,19 +41,21 @@ namespace BE_WiseWallet.Controllers
                 LeaderId = teamRequest.LeaderId,
                 Name = teamRequest.NameTeam,
                 Image = image,
+                Members = new List<ApplicationUser>(),
             };
 
-            // Leader is a member of the team
-            ApplicationUser Leader = await _userManager.FindByIdAsync(teamRequest.LeaderId.ToString());
-            team.Members.Add(Leader);
+            teamRequest.MemberIds.Add(teamRequest.LeaderId);
 
-            foreach (var member in teamRequest.MemberIds)
-            {
-                ApplicationUser Member = await _userManager.FindByIdAsync(member.ToString());
-                team.Members.Add(Member);
-            }
+            await _teamService.CreateNewTeam(team);
+            await _teamService.AddMember(team.Id, teamRequest.MemberIds);
+            return Ok(team);
+        }
 
-            return Ok(await _teamService.CreateNewTeam(team));
+        [HttpPost("AddMember")]
+        public async Task<IActionResult> AddMember([FromForm] TeamAddMemberRequest request)
+        {
+            await _teamService.AddMember(request.TeamId, request.Members);
+            return Ok();
         }
     }
 }

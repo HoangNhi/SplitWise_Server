@@ -34,7 +34,7 @@ namespace BE_WiseWallet.Migrations
 
                     b.HasIndex("TeamsId");
 
-                    b.ToTable("ApplicationUserTeam");
+                    b.ToTable("UserTeam", (string)null);
                 });
 
             modelBuilder.Entity("BE_WiseWallet.Entities.ApplicationUser", b =>
@@ -274,20 +274,19 @@ namespace BE_WiseWallet.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CodeInvite")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<long>("ImageId")
+                    b.Property<long?>("ImageId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("LeaderId")
-                        .HasColumnType("integer");
+                    b.Property<string>("LeaderId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("LinkInvite")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
@@ -519,9 +518,7 @@ namespace BE_WiseWallet.Migrations
                 {
                     b.HasOne("BE_WiseWallet.Entities.Image", "Image")
                         .WithMany()
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ImageId");
 
                     b.Navigation("Image");
                 });
