@@ -46,8 +46,8 @@ namespace BE_WiseWallet.Controllers
 
             teamRequest.MemberIds.Add(teamRequest.LeaderId);
 
-            await _teamService.CreateNewTeam(team);
-            await _teamService.AddMember(team.Id, teamRequest.MemberIds);
+            Team NewTeam = await _teamService.CreateNewTeam(team);
+            await _teamService.AddMember(NewTeam.Id, teamRequest.MemberIds);
             return Ok(team);
         }
 
