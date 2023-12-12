@@ -89,6 +89,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<ITeamService, TeamService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 // CORS
 var cors = new EnableCorsAttribute("AllowAll");
