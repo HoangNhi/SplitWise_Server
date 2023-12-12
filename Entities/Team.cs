@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BE_WiseWallet.Entities
 {
@@ -8,7 +7,7 @@ namespace BE_WiseWallet.Entities
         [Key]
         public int Id { get; set; }
         public required string LeaderId { get; set; }
-        public virtual ICollection<ApplicationUser> Members { get; set; }
+        public virtual ICollection<Member> Members { get; set; }
         public required string Name { get; set; }
         public Image? Image { get; set; }
         public string? LinkInvite { get; set; }

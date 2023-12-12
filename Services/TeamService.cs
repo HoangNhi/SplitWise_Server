@@ -21,13 +21,19 @@ namespace BE_WiseWallet.Services
         {
             // Leader is a member of the team
             Team team = await _context.Teams.FirstOrDefaultAsync(x => x.Id == TeamId);
-            team.Members = new List<ApplicationUser>();
+            team.Members = new List<Member>();
 
             foreach (var member in Members)
             {
-                ApplicationUser Member = await _userManager.FindByIdAsync(member);
-                _context.Entry(Member).State = EntityState.Unchanged;
-                team.Members.Add(Member);
+                Member NewMember = new Member
+                {
+                    TeamId = TeamId,
+                    Team = team,
+                    UserId = member,
+                    User = await _userManager.FindByIdAsync(member)
+                };
+                _context.Entry(NewMember.User).State = EntityState.Unchanged;
+                team.Members.Add(NewMember);
             }
             _context.Teams.Update(team);
             await _context.SaveChangesAsync();
@@ -48,7 +54,9 @@ namespace BE_WiseWallet.Services
 
         public Task<Team> GetTeamById(int Id)
         {
-            return _context.Teams.FirstOrDefaultAsync(x => x.Id == Id);                                                                
+            return _context.Teams
+                           .Include(t => t.Members)
+                           .FirstOrDefaultAsync(x => x.Id == Id);                                                                
         }
     }
 }

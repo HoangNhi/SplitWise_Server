@@ -17,15 +17,19 @@ namespace BE_WiseWallet.Data
         public DbSet<Split> Splits { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Member> Members { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<ApplicationUser>()
-                .HasMany(u => u.Teams)
-                .WithMany(t => t.Members)
-                .UsingEntity(j => j.ToTable("UserTeam"));
+            builder.Entity<Member>()
+                .HasKey(m => new { m.TeamId, m.UserId });
+
+            builder.Entity<Team>()
+                .HasMany(t => t.Members)
+                .WithOne(m => m.Team);
+
         }
     }
 }

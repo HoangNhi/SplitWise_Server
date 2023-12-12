@@ -16,14 +16,10 @@ namespace BE_WiseWallet.Controllers
     {
         private readonly ITeamService _teamService;
         private readonly IImageService _imageService;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ApplicationDbContext _context;
-        public TeamController(ITeamService teamService, IImageService imageService, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        public TeamController(ITeamService teamService, IImageService imageService)
         {
             _teamService = teamService;
             _imageService = imageService;
-            _userManager = userManager;
-            _context = context;
         }
 
         [HttpGet("{id}")]
@@ -41,7 +37,7 @@ namespace BE_WiseWallet.Controllers
                 LeaderId = teamRequest.LeaderId,
                 Name = teamRequest.NameTeam,
                 Image = image,
-                Members = new List<ApplicationUser>(),
+                Members = new List<Member>(),
             };
 
             teamRequest.MemberIds.Add(teamRequest.LeaderId);

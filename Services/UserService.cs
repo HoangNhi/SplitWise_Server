@@ -15,7 +15,11 @@ namespace BE_WiseWallet.Services
         }
         public Task<ApplicationUser> GetUserById(string Id)
         {
-           return _context.Users.Include(u => u.Teams).ThenInclude(t => t.Members).Include(u => u.Image).SingleOrDefaultAsync(u => u.Id == Id);
+           return _context.Users
+                          .Include(u => u.Teams)
+                            .ThenInclude(t => t.Members)
+                          .Include(u => u.Image)
+                          .SingleOrDefaultAsync(u => u.Id == Id);
         }
     }
 }
