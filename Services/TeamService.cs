@@ -56,6 +56,7 @@ namespace BE_WiseWallet.Services
         {
             return _context.Teams
                            .Include(t => t.Members)
+                           .ThenInclude(m => m.User)
                            .FirstOrDefaultAsync(x => x.Id == Id);                                                                
         }
     }

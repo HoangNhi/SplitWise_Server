@@ -30,6 +30,10 @@ namespace BE_WiseWallet.Data
                 .HasMany(t => t.Members)
                 .WithOne(m => m.Team);
 
+            builder.Entity<ApplicationUser>()
+                .HasMany(u => u.Teams)
+                .WithOne(m => m.User);
+
         }
     }
 }

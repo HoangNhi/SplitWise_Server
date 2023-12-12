@@ -17,7 +17,6 @@ namespace BE_WiseWallet.Services
         {
            return _context.Users
                           .Include(u => u.Teams)
-                            .ThenInclude(t => t.Members)
                           .Include(u => u.Image)
                           .SingleOrDefaultAsync(u => u.Id == Id);
         }

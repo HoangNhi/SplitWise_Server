@@ -7,6 +7,6 @@ namespace BE_WiseWallet.Entities
         public required string Name { get; set; }
         public virtual Image? Image { get; set; }
         public Boolean isRemoved { get; set; } = false;
-        public virtual ICollection<Team> Teams { get; set; } = new List<Team>();
+        public virtual ICollection<Member> Teams { get; set; } = new List<Member>();
     }
 }
