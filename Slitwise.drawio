@@ -1,68 +1,68 @@
-<mxfile host="app.diagrams.net" modified="2023-12-19T08:25:23.739Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="v8TvplvAv_PqCf0sbtgY" version="22.1.11" type="github">
+<mxfile host="app.diagrams.net" modified="2023-12-19T10:21:33.040Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="BZtGE5fffu6dT-Tw9FmX" version="22.1.11" type="github">
   <diagram name="Trang-1" id="XOwnt1r5eJL68hhTVcDf">
-    <mxGraphModel dx="724" dy="384" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1600" math="0" shadow="0">
+    <mxGraphModel dx="1050" dy="557" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1600" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="lVbZZnL02DSaKBshp1AG-33" value="Authenticate" style="swimlane;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;gradientColor=none;swimlaneFillColor=default;" vertex="1" parent="1">
+        <mxCell id="lVbZZnL02DSaKBshp1AG-33" value="Authenticate" style="swimlane;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;gradientColor=none;swimlaneFillColor=default;" parent="1" vertex="1">
           <mxGeometry x="20" y="20" width="510" height="240" as="geometry" />
         </mxCell>
-        <mxCell id="lVbZZnL02DSaKBshp1AG-24" value="Login" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="lVbZZnL02DSaKBshp1AG-33">
+        <mxCell id="lVbZZnL02DSaKBshp1AG-24" value="Login" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="lVbZZnL02DSaKBshp1AG-33" vertex="1">
           <mxGeometry x="10" y="30" width="140" height="150" as="geometry" />
         </mxCell>
-        <mxCell id="lVbZZnL02DSaKBshp1AG-25" value="Request:&lt;br&gt;+ Email&lt;br&gt;+ Passowork" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="lVbZZnL02DSaKBshp1AG-24">
+        <mxCell id="lVbZZnL02DSaKBshp1AG-25" value="Request:&lt;br&gt;+ Email&lt;br&gt;+ Passowork" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="lVbZZnL02DSaKBshp1AG-24" vertex="1">
           <mxGeometry y="30" width="140" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="lVbZZnL02DSaKBshp1AG-30" value="Respone:&lt;br&gt;+ Token" style="text;strokeColor=default;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;" vertex="1" parent="lVbZZnL02DSaKBshp1AG-24">
+        <mxCell id="lVbZZnL02DSaKBshp1AG-30" value="Respone:&lt;br&gt;+ Token" style="text;strokeColor=default;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;" parent="lVbZZnL02DSaKBshp1AG-24" vertex="1">
           <mxGeometry y="100" width="140" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="lVbZZnL02DSaKBshp1AG-34" value="Register" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="lVbZZnL02DSaKBshp1AG-33">
+        <mxCell id="lVbZZnL02DSaKBshp1AG-34" value="Register" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="lVbZZnL02DSaKBshp1AG-33" vertex="1">
           <mxGeometry x="170" y="30" width="140" height="190" as="geometry" />
         </mxCell>
-        <mxCell id="lVbZZnL02DSaKBshp1AG-35" value="Request:&lt;br&gt;+ Name&lt;br&gt;+ Email&lt;br&gt;+ Phone&lt;br&gt;+ Password&lt;br&gt;+ Confirm Password" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="lVbZZnL02DSaKBshp1AG-34">
+        <mxCell id="lVbZZnL02DSaKBshp1AG-35" value="Request:&lt;br&gt;+ Name&lt;br&gt;+ Email&lt;br&gt;+ Phone&lt;br&gt;+ Password&lt;br&gt;+ Confirm Password" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="lVbZZnL02DSaKBshp1AG-34" vertex="1">
           <mxGeometry y="30" width="140" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="lVbZZnL02DSaKBshp1AG-36" value="Respone:&lt;br&gt;+ Status: Success or Fail" style="text;strokeColor=default;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;" vertex="1" parent="lVbZZnL02DSaKBshp1AG-34">
+        <mxCell id="lVbZZnL02DSaKBshp1AG-36" value="Respone:&lt;br&gt;+ Status: Success or Fail" style="text;strokeColor=default;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;" parent="lVbZZnL02DSaKBshp1AG-34" vertex="1">
           <mxGeometry y="140" width="140" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="lVbZZnL02DSaKBshp1AG-38" value="Register - Admin" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="lVbZZnL02DSaKBshp1AG-33">
+        <mxCell id="lVbZZnL02DSaKBshp1AG-38" value="Register - Admin" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="lVbZZnL02DSaKBshp1AG-33" vertex="1">
           <mxGeometry x="330" y="30" width="140" height="190" as="geometry" />
         </mxCell>
-        <mxCell id="lVbZZnL02DSaKBshp1AG-39" value="Request:&lt;br&gt;+ Name&lt;br&gt;+ Email&lt;br&gt;+ Phone&lt;br&gt;+ Password&lt;br&gt;+ Confirm Password" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="lVbZZnL02DSaKBshp1AG-38">
+        <mxCell id="lVbZZnL02DSaKBshp1AG-39" value="Request:&lt;br&gt;+ Name&lt;br&gt;+ Email&lt;br&gt;+ Phone&lt;br&gt;+ Password&lt;br&gt;+ Confirm Password" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="lVbZZnL02DSaKBshp1AG-38" vertex="1">
           <mxGeometry y="30" width="140" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="lVbZZnL02DSaKBshp1AG-40" value="Respone:&lt;br&gt;+ Status: Success or Fail" style="text;strokeColor=default;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;" vertex="1" parent="lVbZZnL02DSaKBshp1AG-38">
+        <mxCell id="lVbZZnL02DSaKBshp1AG-40" value="Respone:&lt;br&gt;+ Status: Success or Fail" style="text;strokeColor=default;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;" parent="lVbZZnL02DSaKBshp1AG-38" vertex="1">
           <mxGeometry y="140" width="140" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="lVbZZnL02DSaKBshp1AG-41" value="Team" style="swimlane;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;gradientColor=none;swimlaneFillColor=default;" vertex="1" parent="1">
-          <mxGeometry x="20" y="270" width="510" height="240" as="geometry" />
+        <mxCell id="lVbZZnL02DSaKBshp1AG-41" value="Team" style="swimlane;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;gradientColor=none;swimlaneFillColor=default;" parent="1" vertex="1">
+          <mxGeometry x="20" y="270" width="630" height="290" as="geometry" />
         </mxCell>
-        <mxCell id="lVbZZnL02DSaKBshp1AG-42" value="Get Team By Id&lt;br&gt;/api/Team/{id}" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="lVbZZnL02DSaKBshp1AG-41">
+        <mxCell id="lVbZZnL02DSaKBshp1AG-42" value="Get Team By Id&lt;br&gt;/api/Team/{id}" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="lVbZZnL02DSaKBshp1AG-41" vertex="1">
           <mxGeometry x="10" y="30" width="140" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="lVbZZnL02DSaKBshp1AG-43" value="Request:&lt;br&gt;+ Id" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="lVbZZnL02DSaKBshp1AG-42">
+        <mxCell id="lVbZZnL02DSaKBshp1AG-43" value="Request:&lt;br&gt;+ Id" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="lVbZZnL02DSaKBshp1AG-42" vertex="1">
           <mxGeometry y="30" width="140" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="lVbZZnL02DSaKBshp1AG-44" value="Respone:&lt;br&gt;+ Sucess: Team&lt;br&gt;+ Fail: Not found" style="text;strokeColor=default;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;" vertex="1" parent="lVbZZnL02DSaKBshp1AG-42">
+        <mxCell id="lVbZZnL02DSaKBshp1AG-44" value="Respone:&lt;br&gt;+ Sucess: Team&lt;br&gt;+ Fail: Not found" style="text;strokeColor=default;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;" parent="lVbZZnL02DSaKBshp1AG-42" vertex="1">
           <mxGeometry y="70" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="lVbZZnL02DSaKBshp1AG-45" value="Register" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="lVbZZnL02DSaKBshp1AG-41">
-          <mxGeometry x="170" y="30" width="140" height="190" as="geometry" />
+        <mxCell id="lVbZZnL02DSaKBshp1AG-45" value="Create New Team&lt;br&gt;/api/Team/CreateNewTeam" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="lVbZZnL02DSaKBshp1AG-41" vertex="1">
+          <mxGeometry x="170" y="30" width="160" height="210" as="geometry" />
         </mxCell>
-        <mxCell id="lVbZZnL02DSaKBshp1AG-46" value="Request:&lt;br&gt;+ Name&lt;br&gt;+ Email&lt;br&gt;+ Phone&lt;br&gt;+ Password&lt;br&gt;+ Confirm Password" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="lVbZZnL02DSaKBshp1AG-45">
-          <mxGeometry y="30" width="140" height="110" as="geometry" />
+        <mxCell id="lVbZZnL02DSaKBshp1AG-46" value="Request:&lt;br&gt;+ LeaderId&lt;br&gt;+ NameTeam&lt;br&gt;+ MemberId : List&amp;lt;ID&amp;gt;&lt;br&gt;+ Image" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="lVbZZnL02DSaKBshp1AG-45" vertex="1">
+          <mxGeometry y="30" width="160" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="lVbZZnL02DSaKBshp1AG-47" value="Respone:&lt;br&gt;+ Status: Success or Fail" style="text;strokeColor=default;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;" vertex="1" parent="lVbZZnL02DSaKBshp1AG-45">
-          <mxGeometry y="140" width="140" height="50" as="geometry" />
+        <mxCell id="lVbZZnL02DSaKBshp1AG-47" value="Respone:&lt;br&gt;+ Sucess: Team&lt;br&gt;+ Fail: Bad request" style="text;strokeColor=default;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;" parent="lVbZZnL02DSaKBshp1AG-45" vertex="1">
+          <mxGeometry y="140" width="160" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="lVbZZnL02DSaKBshp1AG-48" value="Register - Admin" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="lVbZZnL02DSaKBshp1AG-41">
-          <mxGeometry x="330" y="30" width="140" height="190" as="geometry" />
+        <mxCell id="lVbZZnL02DSaKBshp1AG-48" value="Add Member&lt;br&gt;Post/api/Team/AddMember" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="lVbZZnL02DSaKBshp1AG-41" vertex="1">
+          <mxGeometry x="350" y="30" width="190" height="160" as="geometry" />
         </mxCell>
-        <mxCell id="lVbZZnL02DSaKBshp1AG-49" value="Request:&lt;br&gt;+ Name&lt;br&gt;+ Email&lt;br&gt;+ Phone&lt;br&gt;+ Password&lt;br&gt;+ Confirm Password" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="lVbZZnL02DSaKBshp1AG-48">
-          <mxGeometry y="30" width="140" height="110" as="geometry" />
+        <mxCell id="lVbZZnL02DSaKBshp1AG-49" value="Request:&lt;br&gt;+ TeamId&lt;br&gt;+ MemberId: List&amp;lt;Id&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="lVbZZnL02DSaKBshp1AG-48" vertex="1">
+          <mxGeometry y="30" width="190" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="lVbZZnL02DSaKBshp1AG-50" value="Respone:&lt;br&gt;+ Status: Success or Fail" style="text;strokeColor=default;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;" vertex="1" parent="lVbZZnL02DSaKBshp1AG-48">
-          <mxGeometry y="140" width="140" height="50" as="geometry" />
+        <mxCell id="lVbZZnL02DSaKBshp1AG-50" value="Respone:&lt;br&gt;+ Success: Team&lt;br&gt;+ Fail: Bad request" style="text;strokeColor=default;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;" parent="lVbZZnL02DSaKBshp1AG-48" vertex="1">
+          <mxGeometry y="110" width="190" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
