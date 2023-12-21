@@ -116,14 +116,18 @@ namespace BE_WiseWallet.Controllers
             string AccessToken = Request.Headers.Authorization.ToString().Replace("Bearer ", "");
             UserResponse UserResponse = await _userService.GetUserByAccessToken(AccessToken);
             Team team = UserResponse.Teams.FirstOrDefault(t => t.Id == id);
-            if(team == null)
+            if (team == null)
             {
                 return BadRequest();
             }
+            else if(UserResponse.Id == team.LeaderId)
+            {
+                return new ObjectResult(new { message = "Leader can't leave the team" }) { StatusCode = StatusCodes.Status405MethodNotAllowed };
+            }   
             else
             {
                 Team t = await _teamService.OutTeam(id, UserResponse.Id);
-                if(t == null)
+                if (t == null)
                 {
                     return BadRequest();
                 }
@@ -131,6 +135,60 @@ namespace BE_WiseWallet.Controllers
                 {
                     return Ok(t);
                 }
+            }
+        }
+
+        [HttpPut("UpdateTeam")]
+        public async Task<IActionResult> UpdateTeam([FromForm] TeamUpdate teamRequest)
+        {
+            try
+            {
+                string AccessToken = Request.Headers.Authorization.ToString().Replace("Bearer ", "");
+                UserResponse UserResponse = await _userService.GetUserByAccessToken(AccessToken);
+                Team UpdateTeam = await _teamService.GetTeamById(teamRequest.Id);
+
+                if(UserResponse.Id != UpdateTeam.LeaderId)
+                {
+                    return new ObjectResult(new { message = "You are not the leader of this team" }) { StatusCode = StatusCodes.Status403Forbidden };
+                }
+
+                Team team = await _teamService.UpdateTeam(teamRequest);
+                if(team == null)
+                {
+                    return BadRequest();
+                }
+                else
+                {
+                    return Ok(team);
+                }
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost("CompleteTravel")]
+        public async Task<IActionResult> CompleteTravel(int TeamId)
+        {
+            try
+            {
+                string AccessToken = Request.Headers.Authorization.ToString().Replace("Bearer ", "");
+                UserResponse UserResponse = await _userService.GetUserByAccessToken(AccessToken);
+                Team UpdateTeam = await _teamService.GetTeamById(TeamId);
+
+                if (UserResponse.Id != UpdateTeam.LeaderId)
+                {
+                    return new ObjectResult(new { message = "You are not the leader of this team" }) { StatusCode = StatusCodes.Status403Forbidden };
+                }
+                else
+                {
+                    return Ok(await _teamService.CompleteTravel(TeamId));
+                }
+            }
+            catch
+            { 
+                return BadRequest();
             }
         }
     }

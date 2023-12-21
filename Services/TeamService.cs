@@ -1,6 +1,8 @@
 ﻿using BE_WiseWallet.Data;
 using BE_WiseWallet.Entities;
 using BE_WiseWallet.Entities.Requests;
+using BE_WiseWallet.Entities.Requests.Team;
+using BE_WiseWallet.Enums;
 using BE_WiseWallet.Services.IServices;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
@@ -20,11 +22,18 @@ namespace BE_WiseWallet.Services
         public async Task<Team> AddMember(int TeamId, ICollection<string> Members)
         {
             // Leader is a member of the team
-            Team team = await _context.Teams.FirstOrDefaultAsync(x => x.Id == TeamId);
-            team.Members = new List<Member>();
+            Team team = await _context.Teams.Include(t => t.Members).FirstOrDefaultAsync(x => x.Id == TeamId);
 
             foreach (var member in Members)
             {
+                Member checkMember = team.Members.FirstOrDefault(x => x.UserId == member);
+                if (checkMember != null)
+                {
+                    checkMember.Status = MemberStatus.Active;
+                    checkMember.UpdateAt = DateTime.Now;
+                    _context.Members.Update(checkMember);
+                    continue;
+                }
                 Member NewMember = new Member
                 {
                     TeamId = TeamId,
@@ -40,6 +49,19 @@ namespace BE_WiseWallet.Services
             return team;
         }
 
+        public Task<Team> CompleteTravel(int TeamId)
+        {
+            Team team = _context.Teams.FirstOrDefault(x => x.Id == TeamId);
+            if(team == null)
+            {
+                return null;
+            }
+            team.isCompleted = true;
+            _context.Teams.Update(team);
+            _context.SaveChanges();
+            return Task.FromResult(team);
+        }
+
         public async Task<Team> CreateNewTeam(Team team)
         {
             _context.Teams.Add(team);
@@ -51,10 +73,12 @@ namespace BE_WiseWallet.Services
         {
             foreach (var member in Members)
             {
-                Member memberToRemove = team.Members.FirstOrDefault(x => x.UserId == member);
-                team.Members.Remove(memberToRemove);
+                // Just update member active status
+                Member memberToRemove = team.Members.Where(t => t.Status != MemberStatus.Inactive).FirstOrDefault(x => x.UserId == member);
+                memberToRemove.Status = MemberStatus.Inactive;
+                memberToRemove.UpdateAt = DateTime.Now;
+                _context.Members.Update(memberToRemove);
             }
-            _context.Teams.Update(team);
             _context.SaveChanges();
             return Task.FromResult(team);
         }
@@ -69,7 +93,39 @@ namespace BE_WiseWallet.Services
 
         public Task<Team> OutTeam(int TeamId, string UserId)
         {
-            throw new NotImplementedException();
+            Team team = _context.Teams.FirstOrDefault(x => x.Id == TeamId);
+            Member member = team.Members.FirstOrDefault(x => x.UserId == UserId);
+            if(member != null)
+            {
+                member.Status = MemberStatus.Inactive;
+                member.UpdateAt = DateTime.Now;
+                _context.Members.Update(member);
+                _context.SaveChanges();
+                return Task.FromResult(team);
+            }
+            else
+            {
+                return Task.FromResult<Team>(null);
+            }
         }
+
+        public Task<Team> UpdateTeam(TeamUpdate teamUpdate)
+        {
+            Team team = GetTeamById(teamUpdate.Id).Result;
+            if(team == null)
+            {
+                return null;
+            }
+            else
+            {
+                team.LeaderId = teamUpdate.LeaderId == null ? team.LeaderId : teamUpdate.LeaderId;
+                team.Name = teamUpdate.Name == null ? team.Name : teamUpdate.Name;
+            }
+            _context.Teams.Update(team);
+            _context.SaveChanges();
+            return Task.FromResult(team);
+        }
+
+
     }
 }
