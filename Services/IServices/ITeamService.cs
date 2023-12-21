@@ -6,7 +6,8 @@ namespace BE_WiseWallet.Services.IServices
     {
         public Task<Team> GetTeamById(int Id);
         public Task<Team> CreateNewTeam(Team team);
-        public Task<Team> DeleteMember();
+        public Task<Team> DeleteMember(Team team, ICollection<string> Members);
         public Task<Team> AddMember(int TeamId, ICollection<string> Members);
+        public Task<Team> OutTeam(int TeamId, string UserId);
     }
 }

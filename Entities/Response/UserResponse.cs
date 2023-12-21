@@ -9,7 +9,7 @@
         public string PhoneNumber { get; set; }
         public Boolean IsRemoved { get; set; }
         public Image Image { get; set; }
-        public ICollection<Member> Teams { get; set; }
+        public ICollection<Team> Teams { get; set; }
         public string Role { get; set; }
 
     }

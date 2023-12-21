@@ -47,9 +47,16 @@ namespace BE_WiseWallet.Services
             return team;
         }
 
-        public Task<Team> DeleteMember()
+        public Task<Team> DeleteMember(Team team, ICollection<string> Members)
         {
-            throw new NotImplementedException();
+            foreach (var member in Members)
+            {
+                Member memberToRemove = team.Members.FirstOrDefault(x => x.UserId == member);
+                team.Members.Remove(memberToRemove);
+            }
+            _context.Teams.Update(team);
+            _context.SaveChanges();
+            return Task.FromResult(team);
         }
 
         public Task<Team> GetTeamById(int Id)
@@ -58,6 +65,11 @@ namespace BE_WiseWallet.Services
                            .Include(t => t.Members)
                            .ThenInclude(m => m.User)
                            .FirstOrDefaultAsync(x => x.Id == Id);                                                                
+        }
+
+        public Task<Team> OutTeam(int TeamId, string UserId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

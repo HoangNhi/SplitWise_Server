@@ -1,8 +1,11 @@
 ﻿using BE_WiseWallet.Data;
 using BE_WiseWallet.Entities;
-using BE_WiseWallet.Entities.Requests;
+using BE_WiseWallet.Entities.Requests.Team;
+using BE_WiseWallet.Entities.Respones;
 using BE_WiseWallet.Services.IServices;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,42 +19,119 @@ namespace BE_WiseWallet.Controllers
     {
         private readonly ITeamService _teamService;
         private readonly IImageService _imageService;
-        public TeamController(ITeamService teamService, IImageService imageService)
+        private readonly IUserService _userService;
+        public TeamController(ITeamService teamService, IImageService imageService, IUserService userService)
         {
             _teamService = teamService;
             _imageService = imageService;
+            _userService = userService;
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            return Ok(await _teamService.GetTeamById(id));
+            Team team = await _teamService.GetTeamById(id);
+            if (team == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(team);
+            }
         }
 
         [HttpPost("CreateNewTeam")]
-        public async Task<IActionResult> CreateNewTeam([FromForm] TeamRequest teamRequest)
+        public async Task<IActionResult> CreateNewTeam([FromForm] TeamCreate teamRequest)
         {
-            Image image = _imageService.Upload(teamRequest.Image).Result;
-            Team team = new Team
+            try
             {
-                LeaderId = teamRequest.LeaderId,
-                Name = teamRequest.NameTeam,
-                Image = image,
-                Members = new List<Member>(),
-            };
+                Image image = _imageService.Upload(teamRequest.Image).Result;
+                Team team = new Team
+                {
+                    LeaderId = teamRequest.LeaderId,
+                    Name = teamRequest.NameTeam,
+                    Image = image,
+                    Members = new List<Member>(),
+                };
 
-            teamRequest.MemberIds.Add(teamRequest.LeaderId);
+                teamRequest.MemberIds.Add(teamRequest.LeaderId);
 
-            Team NewTeam = await _teamService.CreateNewTeam(team);
-            await _teamService.AddMember(NewTeam.Id, teamRequest.MemberIds);
-            return Ok(team);
+                Team NewTeam = await _teamService.CreateNewTeam(team);
+                await _teamService.AddMember(NewTeam.Id, teamRequest.MemberIds);
+                return Ok(team);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPost("AddMember")]
-        public async Task<IActionResult> AddMember([FromForm] TeamAddMemberRequest request)
+        public async Task<IActionResult> AddMember([FromForm] TeamUpdateMember request)
         {
-            await _teamService.AddMember(request.TeamId, request.Members);
-            return Ok();
+            try
+            {
+                Team team = await _teamService.AddMember(request.TeamId, request.Members);
+                return Ok(team);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpDelete("DeleteMember")]
+        public async Task<IActionResult> DeleteMember([FromForm] TeamUpdateMember request)
+        {
+            string AccessToken = Request.Headers.Authorization.ToString().Replace("Bearer ", "");
+            UserResponse UserResponse = await _userService.GetUserByAccessToken(AccessToken);
+            Team team = await _teamService.GetTeamById(request.TeamId);
+            
+            if (UserResponse.Id != team.LeaderId)
+            {
+                return new ObjectResult(new { message = "You are not the leader of this team" }) { StatusCode = StatusCodes.Status403Forbidden };
+            }
+            else if (request.Members.Contains(team.LeaderId))
+            {
+                return new ObjectResult(new { message = "Leader can't leave the team" }) { StatusCode = StatusCodes.Status405MethodNotAllowed };
+            }
+            else
+            {
+                Team t = await _teamService.DeleteMember(team, request.Members);
+                if(t == null)
+                {
+                    return BadRequest();
+                }
+                else
+                {
+                    return Ok(t);
+                }
+            }
+        }
+
+        [HttpDelete("OutTeam")]
+        public async Task<IActionResult> OutTeam([FromForm] int id)
+        {
+            string AccessToken = Request.Headers.Authorization.ToString().Replace("Bearer ", "");
+            UserResponse UserResponse = await _userService.GetUserByAccessToken(AccessToken);
+            Team team = UserResponse.Teams.FirstOrDefault(t => t.Id == id);
+            if(team == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                Team t = await _teamService.OutTeam(id, UserResponse.Id);
+                if(t == null)
+                {
+                    return BadRequest();
+                }
+                else
+                {
+                    return Ok(t);
+                }
+            }
         }
     }
 }

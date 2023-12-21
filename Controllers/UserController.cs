@@ -30,27 +30,15 @@ namespace BE_WiseWallet.Controllers
         public async Task<IActionResult> GetUserByAccessToken()
         {
             string accessToken = Request.Headers.Authorization.ToString().Replace("Bearer ", "");
-            List<Claim> claims = _tokenService.GetClaimsFromExpiredToken(accessToken);
-            string userId = claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            ApplicationUser user = await _userService.GetUserById(userId);
-            string role = string.Join(",", await _userManager.GetRolesAsync(user)) == "Admin,User" ? "Admin" : "User";
-            if (user == null)
+            UserResponse userResponse = await _userService.GetUserByAccessToken(accessToken);
+            if (userResponse == null)
             {
-                return NotFound();
+                return BadRequest();
             }
-            UserResponse u = new UserResponse
+            else
             {
-                Id = user.Id,
-                UserName = user.UserName,
-                FullName = user.Name,
-                EmailAddress = user.Email,
-                PhoneNumber = user.PhoneNumber,
-                Role = role,
-                Image = user.Image,
-                Teams = user.Teams,
-                IsRemoved = user.isRemoved,
-            };
-            return Ok(u);
+                return Ok(userResponse);
+            }
         }
     }
 }

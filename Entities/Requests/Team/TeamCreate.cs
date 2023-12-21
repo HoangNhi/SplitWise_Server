@@ -1,6 +1,6 @@
-﻿namespace BE_WiseWallet.Entities.Requests
+﻿namespace BE_WiseWallet.Entities.Requests.Team
 {
-    public class TeamRequest
+    public class TeamCreate
     {
         public required string LeaderId { get; set; }
         public required string NameTeam { get; set; }
