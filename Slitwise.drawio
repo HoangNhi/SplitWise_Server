@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-12-19T10:45:05.736Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="CX3azecFcrIECQgylUE-" version="22.1.11" type="github">
+<mxfile host="app.diagrams.net" modified="2023-12-21T09:20:36.108Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="s2DclxC8uJvhZZ7wBXmz" version="22.1.11" type="github">
   <diagram name="Trang-1" id="XOwnt1r5eJL68hhTVcDf">
     <mxGraphModel dx="1050" dy="557" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1600" math="0" shadow="0">
       <root>
@@ -35,7 +35,7 @@
           <mxGeometry y="140" width="140" height="50" as="geometry" />
         </mxCell>
         <mxCell id="lVbZZnL02DSaKBshp1AG-41" value="Team" style="swimlane;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;gradientColor=none;swimlaneFillColor=default;" parent="1" vertex="1">
-          <mxGeometry x="20" y="270" width="550" height="500" as="geometry" />
+          <mxGeometry x="20" y="270" width="550" height="680" as="geometry" />
         </mxCell>
         <mxCell id="lVbZZnL02DSaKBshp1AG-42" value="Get Team By Id&lt;br&gt;/api/Team/{id}" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="lVbZZnL02DSaKBshp1AG-41" vertex="1">
           <mxGeometry x="10" y="30" width="140" height="130" as="geometry" />
@@ -64,16 +64,28 @@
         <mxCell id="lVbZZnL02DSaKBshp1AG-50" value="Respone:&lt;br&gt;+ Success: Team&lt;br&gt;+ Fail: Bad request" style="text;strokeColor=default;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;" parent="lVbZZnL02DSaKBshp1AG-48" vertex="1">
           <mxGeometry y="110" width="190" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="xmV70vcu-xuBGsjP_1VR-1" value="User" style="swimlane;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;gradientColor=none;swimlaneFillColor=default;" vertex="1" parent="1">
+        <mxCell id="orSCBOyRNhUcVAB-8KTF-1" value="Delete Member&lt;br&gt;Delete/api/Team/AddMember" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="lVbZZnL02DSaKBshp1AG-41">
+          <mxGeometry x="350" y="210" width="190" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="orSCBOyRNhUcVAB-8KTF-2" value="Request:&lt;br&gt;+ TeamId&lt;br&gt;+ MemberId: List&amp;lt;Id&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="orSCBOyRNhUcVAB-8KTF-1">
+          <mxGeometry y="30" width="190" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="orSCBOyRNhUcVAB-8KTF-3" value="Respone:&lt;br&gt;+ Success: Team&lt;br&gt;+ Fail: Bad request" style="text;strokeColor=default;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;" vertex="1" parent="orSCBOyRNhUcVAB-8KTF-1">
+          <mxGeometry y="110" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="orSCBOyRNhUcVAB-8KTF-4" value="&lt;h1&gt;Note:&lt;/h1&gt;&lt;div&gt;+ Việc thêm thành viên mới có thể thực hiện bởi bất kỳ thành viên trong nhóm&lt;br&gt;+ Khi thêm thành viên thì hệ thống sẽ kiểm tra trong List&amp;lt;Member&amp;gt; của Team để xem thành viên đã có trong nhóm trong quá khứ không. Nếu có thì sẽ cập nhật giá trị Member status của class Member&lt;br&gt;Delete member sẽ cập nhật giá trị member status&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="lVbZZnL02DSaKBshp1AG-41">
+          <mxGeometry x="10" y="420" width="530" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="xmV70vcu-xuBGsjP_1VR-1" value="User" style="swimlane;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;gradientColor=none;swimlaneFillColor=default;" parent="1" vertex="1">
           <mxGeometry x="600" y="20" width="510" height="200" as="geometry" />
         </mxCell>
-        <mxCell id="xmV70vcu-xuBGsjP_1VR-2" value="Get User By Access Token&lt;br&gt;GET/api/User" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="xmV70vcu-xuBGsjP_1VR-1">
+        <mxCell id="xmV70vcu-xuBGsjP_1VR-2" value="Get User By Access Token&lt;br&gt;GET/api/User" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="xmV70vcu-xuBGsjP_1VR-1" vertex="1">
           <mxGeometry x="10" y="30" width="170" height="160" as="geometry" />
         </mxCell>
-        <mxCell id="xmV70vcu-xuBGsjP_1VR-3" value="Request:&lt;br&gt;+ Login" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="xmV70vcu-xuBGsjP_1VR-2">
+        <mxCell id="xmV70vcu-xuBGsjP_1VR-3" value="Request:&lt;br&gt;+ Login" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="xmV70vcu-xuBGsjP_1VR-2" vertex="1">
           <mxGeometry y="30" width="170" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="xmV70vcu-xuBGsjP_1VR-4" value="Respone:&lt;br&gt;+ Sucess: User&lt;br&gt;+ Fail: Bad request" style="text;strokeColor=default;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;" vertex="1" parent="xmV70vcu-xuBGsjP_1VR-2">
+        <mxCell id="xmV70vcu-xuBGsjP_1VR-4" value="Respone:&lt;br&gt;+ Sucess: User&lt;br&gt;+ Fail: Bad request" style="text;strokeColor=default;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;" parent="xmV70vcu-xuBGsjP_1VR-2" vertex="1">
           <mxGeometry y="100" width="170" height="60" as="geometry" />
         </mxCell>
       </root>
